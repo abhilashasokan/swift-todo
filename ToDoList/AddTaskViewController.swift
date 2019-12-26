@@ -31,6 +31,7 @@ class AddTaskViewController: UIViewController {
     weak var delegate: ToDoListDelegate?
     
     let toolbarDone = UIToolbar.init()
+    let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
     
     lazy var touchView: UIView = {
         let _touchView = UIView();
@@ -158,13 +159,24 @@ class AddTaskViewController: UIViewController {
         let completionDate: Date = taskCompletionDatePicker.date
         if completionDate < Date() {
             // Report error
+            print(completionDate)
+            print(Date())
             reportError(title: "Invalid Completeion Date", message: "Completeion Date is required")
             return
         }
         
         // Save data back via protocol delegate method
-        let toDoItem = ToDoItem(name: taskName, details: taskDetailsTextView.text, completionDate: completionDate)
-        delegate?.addNewTask(task: toDoItem)
+        // let toDoItem = ToDoItem(name: taskName, details: taskDetailsTextView.text, completionDate: completionDate)
+        let context = appDelegate.persistentContainer.viewContext
+        let toDoItem = ToDoItem(context: context)
+        toDoItem.name = taskName
+        toDoItem.details = taskDetailsTextView.text
+        toDoItem.completionDate = completionDate
+        toDoItem.isComplete = false
+        toDoItem.startDate = Date()
+        appDelegate.saveContext()
+        
+         delegate?.addNewTask()
         cancelButtonDidTouch()
         
         

@@ -15,6 +15,7 @@
 		E1A2C09021AEFBDB0091E41F /* ToDoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A2C08F21AEFBDB0091E41F /* ToDoDetailsViewController.swift */; };
 		E1A2C09221AF01770091E41F /* ToDoItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A2C09121AF01770091E41F /* ToDoItemModel.swift */; };
 		E1A2C09421AF07410091E41F /* AddTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A2C09321AF07410091E41F /* AddTaskViewController.swift */; };
+		F1BC6A5223B5154200FBD379 /* ToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F1BC6A5023B5154200FBD379 /* ToDoList.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,9 @@
 		E1A2C08F21AEFBDB0091E41F /* ToDoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoDetailsViewController.swift; sourceTree = "<group>"; };
 		E1A2C09121AF01770091E41F /* ToDoItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItemModel.swift; sourceTree = "<group>"; };
 		E1A2C09321AF07410091E41F /* AddTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskViewController.swift; sourceTree = "<group>"; };
+		F1BC6A2623B5024600FBD379 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = "../../../Downloads/realm-swift-4.3.0/ios/swift-11.3/Realm.framework"; sourceTree = "<group>"; };
+		F1BC6A2723B5024600FBD379 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = "../../../Downloads/realm-swift-4.3.0/ios/swift-11.3/RealmSwift.framework"; sourceTree = "<group>"; };
+		F1BC6A5123B5154200FBD379 /* ToDoList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoList.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +50,7 @@
 			children = (
 				E1A2C07A21AEF8170091E41F /* ToDoList */,
 				E1A2C07921AEF8170091E41F /* Products */,
+				F1BC6A2523B5024600FBD379 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,8 +74,18 @@
 				E1A2C08221AEF81B0091E41F /* Assets.xcassets */,
 				E1A2C08421AEF81B0091E41F /* LaunchScreen.storyboard */,
 				E1A2C08721AEF81B0091E41F /* Info.plist */,
+				F1BC6A5023B5154200FBD379 /* ToDoList.xcdatamodeld */,
 			);
 			path = ToDoList;
+			sourceTree = "<group>";
+		};
+		F1BC6A2523B5024600FBD379 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F1BC6A2623B5024600FBD379 /* Realm.framework */,
+				F1BC6A2723B5024600FBD379 /* RealmSwift.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,6 +161,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1A2C09221AF01770091E41F /* ToDoItemModel.swift in Sources */,
+				F1BC6A5223B5154200FBD379 /* ToDoList.xcdatamodeld in Sources */,
 				E1A2C09021AEFBDB0091E41F /* ToDoDetailsViewController.swift in Sources */,
 				E1A2C08E21AEFBA00091E41F /* ToDoListViewController.swift in Sources */,
 				E1A2C07C21AEF8170091E41F /* AppDelegate.swift in Sources */,
@@ -296,6 +312,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 9RYQBV3FAC;
 				INFOPLIST_FILE = ToDoList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -314,6 +331,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 9RYQBV3FAC;
 				INFOPLIST_FILE = ToDoList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -349,6 +367,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F1BC6A5023B5154200FBD379 /* ToDoList.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F1BC6A5123B5154200FBD379 /* ToDoList.xcdatamodel */,
+			);
+			currentVersion = F1BC6A5123B5154200FBD379 /* ToDoList.xcdatamodel */;
+			path = ToDoList.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E1A2C07021AEF8170091E41F /* Project object */;
 }

@@ -9,14 +9,23 @@
 import UIKit
 
 protocol ToDoListDelegate: class {
-    func update(task: ToDoItem, index: Int)
-    func addNewTask(task: ToDoItem)
+    func update()
+    func addNewTask()
 }
 
 class ToDoListViewController: UIViewController, UITableViewDelegate,  UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    var toDoItems: [ToDoItem] = [ToDoItem]()
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var toDoItems: [ToDoItem] {
+        do {
+            return try context.fetch(ToDoItem.fetchRequest())
+        } catch {
+            print("Couldnt fetch data")
+        }
+        return [ToDoItem]()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +81,10 @@ class ToDoListViewController: UIViewController, UITableViewDelegate,  UITableVie
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            self.toDoItems.remove(at: indexPath.row)
+            let toDoItem = self.toDoItems[indexPath.row]
+            self.context.delete(toDoItem)
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            // self.toDoItems.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
         return [delete]
@@ -117,14 +129,11 @@ class ToDoListViewController: UIViewController, UITableViewDelegate,  UITableVie
 }
 
 extension ToDoListViewController: ToDoListDelegate {
-    func update(task: ToDoItem, index: Int) {
-        toDoItems[index] = task
+    func update() {
         tableView.reloadData()
     }
     
-    func addNewTask(task: ToDoItem) {
-        toDoItems.append(task)
-        toDoItems.sort(by: { $0.completionDate < $1.completionDate })
+    func addNewTask() {
         tableView.reloadData()
     }
 }

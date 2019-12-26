@@ -26,6 +26,7 @@ class ToDoDetailsViewController: UIViewController {
     
     @IBOutlet weak var taskCompletionDate: UILabel!
     
+    let appDelegate = (UIApplication.shared.delegate as! AppDelegate)
     var toDoItem: ToDoItem!
     var toDoIndex: Int!
     
@@ -42,7 +43,7 @@ class ToDoDetailsViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd, yyyy hh:mm"
 //        let taskDate = formatter.string(from: toDoItem.completionDate)
-        taskCompletionDate.text =  formatter.string(from: toDoItem.completionDate)
+        taskCompletionDate.text =  formatter.string(from: toDoItem.completionDate!)
     }
     
     func disableButton() {
@@ -53,7 +54,8 @@ class ToDoDetailsViewController: UIViewController {
     
     @IBAction func taskDidComplete(_ sender: Any) {
         toDoItem.isComplete = true
-        delegate?.update(task: toDoItem, index: toDoIndex)
+        appDelegate.saveContext()
+        delegate?.update()
         disableButton()
     }
     

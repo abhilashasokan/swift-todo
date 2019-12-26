@@ -16,7 +16,7 @@
 
 import Foundation
 
-
+/*
 struct ToDoItem {
     var name: String
     var details: String
@@ -32,3 +32,4 @@ struct ToDoItem {
         self.startDate = Date()
     }
 }
+*/
