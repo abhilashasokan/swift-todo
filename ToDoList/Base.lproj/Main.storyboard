@@ -60,6 +60,7 @@
                     <connections>
                         <outlet property="tableView" destination="qu5-4n-exV" id="Pel-T1-4H7"/>
                         <segue destination="k7o-Ai-0d8" kind="show" identifier="TaskDetailsSegue" id="Ybl-8x-Q9w"/>
+                        <segue destination="Xu4-Sk-1d2" kind="presentation" identifier="AddTaskSegue" id="iTs-bq-PAr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -71,11 +72,11 @@
             <objects>
                 <viewController id="Xu4-Sk-1d2" customClass="AddTaskViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2OX-u0-xO0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NyP-IY-3hx">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2pN-FO-F4l">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
@@ -89,7 +90,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l5h-r0-Grv">
                                                 <rect key="frame" x="20" y="64.5" width="335" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCj-Yg-4wa">
                                                 <rect key="frame" x="20" y="128.5" width="87" height="19.5"/>
@@ -194,7 +195,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ch8-4m-8gl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1549.5999999999999" y="-125.4872563718141"/>
+            <point key="canvasLocation" x="2489" y="-113"/>
         </scene>
         <!--To Do Details View Controller-->
         <scene sceneID="vfs-sm-CMQ">

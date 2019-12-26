@@ -10,6 +10,7 @@ import UIKit
 
 protocol ToDoListDelegate: class {
     func update(task: ToDoItem, index: Int)
+    func addNewTask(task: ToDoItem)
 }
 
 class ToDoListViewController: UIViewController, UITableViewDelegate,  UITableViewDataSource {
@@ -25,19 +26,56 @@ class ToDoListViewController: UIViewController, UITableViewDelegate,  UITableVie
         tableView.tableFooterView = UIView()
         title = "To Do List"
         
-        let testItem = ToDoItem(name: "Hello Sam", details: "Lorem", completionDate: Date())
-        self.toDoItems.append(testItem)
-        
-        let testItem1 = ToDoItem(name: "Hello Sam1", details: "Lorem1", completionDate: Date())
-        self.toDoItems.append(testItem1)
-        
-        let testItem2 = ToDoItem(name: "Hello Sam2", details: "Lorem2", completionDate: Date())
-        self.toDoItems.append(testItem2)
-    }
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
 
+        // Notification Save
+        // NotificationCenter.default.addObserver(self, selector: #selector(addNewTask(_ :)), name: NSNotification.Name.init("com.sweetgodzillas.todoapp.addtask"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tableView.setEditing(false, animated: false)
+    }
+    
+    @objc func addTapped() {
+        performSegue(withIdentifier: "AddTaskSegue", sender: nil)
+    }
+    
+    @objc func editTapped() {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+        
+        if tableView.isEditing == true {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editTapped))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editTapped))
+        }
+    }
+    
+    // Notification Save
+    
+    //    @objc func addNewTask(_ notification: NSNotification) {
+    //        var toDoItem: ToDoItem!
+    //        if let task = notification.object as? ToDoItem {
+    //            toDoItem = task
+    //        } else {
+    //            return
+    //        }
+    //        toDoItems.append(toDoItem)
+    //        toDoItems.sort(by: { $0.completionDate > $1.completionDate })
+    //        tableView.reloadData()
+    //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         toDoItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            self.toDoItems.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        return [delete]
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,12 +104,27 @@ class ToDoListViewController: UIViewController, UITableViewDelegate,  UITableVie
             destinationVC.toDoItem = toDoTuple.1
             destinationVC.delegate = self
         }
+        
+        if segue.identifier == "AddTaskSegue" {
+            guard let desinationVC = segue.destination as? AddTaskViewController else { return }
+            desinationVC.delegate = self
+        }
+     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name:  NSNotification.Name.init("com.sweetgodzillas.todoapp.addtask"), object: nil)
     }
 }
 
 extension ToDoListViewController: ToDoListDelegate {
     func update(task: ToDoItem, index: Int) {
         toDoItems[index] = task
+        tableView.reloadData()
+    }
+    
+    func addNewTask(task: ToDoItem) {
+        toDoItems.append(task)
+        toDoItems.sort(by: { $0.completionDate < $1.completionDate })
         tableView.reloadData()
     }
 }
